@@ -1,0 +1,18 @@
+{
+    "name": "okkun_sh/php-json-parser",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "OkkunSh\\PhpJsonParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "okkun-sh",
+            "email": "okkun.sh@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.4"
+    }
+}
