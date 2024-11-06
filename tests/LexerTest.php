@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class LexerTest extends TestCase
 {
-    public function testLexerValidObject()
+    public function testLexerValidObject(): void
     {
         $input = '{"aaa": "AA"}';
         $lexer = new Lexer($input);
@@ -38,7 +38,7 @@ class LexerTest extends TestCase
         $this->assertEquals($expected, $lexer->tokens());
     }
 
-    public function testLexerValidArray()
+    public function testLexerValidArray(): void
     {
 
         $input = '[123, "abc", true, null, {"key": "value"}]';

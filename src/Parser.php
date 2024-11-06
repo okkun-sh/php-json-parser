@@ -92,7 +92,7 @@ class Parser
         return $object;
     }
 
-    private function parseArray(): array
+    private function parseArray()
     {
         $this->expect('LBRACKET');
 
