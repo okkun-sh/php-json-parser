@@ -1,0 +1,39 @@
+name: run
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer, phpcs, phpstan, phpunit
+
+      - name: cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: install deps
+        run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: run phpcs
+        run: vendor/bin/phpcs --standard=PSR12 src tests
+
+      - name: run phpstan
+        run: vendor/bin/phpstan analyse
+
+      - name: phpunit
+        run: vendor/bin/phpunit --colors=always

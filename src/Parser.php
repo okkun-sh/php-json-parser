@@ -4,7 +4,8 @@ namespace OkkunSh\PhpJsonParser;
 
 use Exception;
 
-class Parser {
+class Parser
+{
     /**
      * @var array<int, array<string, string>> $tokens
      */
@@ -19,14 +20,16 @@ class Parser {
     /**
      * @param array<int, array<string, string>> $tokens
      */
-    public function __construct(array $tokens) {
+    public function __construct(array $tokens)
+    {
         $this->tokens = $tokens;
     }
 
     /**
      * @return array
      */
-    public function parse() {
+    public function parse(): array
+    {
         $result = $this->parseValue();
         if ($this->currentToken()['type'] !== 'EOF') {
             throw new Exception("unexpected token after parsing complete");
@@ -35,37 +38,39 @@ class Parser {
         return $result;
     }
 
-    private function parseValue() {
+    private function parseValue()
+    {
         $token = $this->currentToken();
 
         switch ($token['type']) {
-        case "LBRACE":
-            return $this->parseObject();
-        case "LBRACKET":
-            return $this->parseArray();
-        case "STRING":
-            $this->advance();
-            return $token['value'];
-        case "NUMBER":
-            $this->advance();
-            return (float) $token['value'];
-        case "TRUE":
-            $this->advance();
-            return true;
-        case "FALSE":
-            $this->advance();
-            return false;
-        case "NULL":
-            $this->advance();
-            return null;
-        case "EOF":
-            return null;
-        default:
-            throw new Exception("unexpected token: {$token['type']}");
+            case "LBRACE":
+                return $this->parseObject();
+            case "LBRACKET":
+                return $this->parseArray();
+            case "STRING":
+                $this->advance();
+                return $token['value'];
+            case "NUMBER":
+                $this->advance();
+                return (float) $token['value'];
+            case "TRUE":
+                $this->advance();
+                return true;
+            case "FALSE":
+                $this->advance();
+                return false;
+            case "NULL":
+                $this->advance();
+                return null;
+            case "EOF":
+                return null;
+            default:
+                throw new Exception("unexpected token: {$token['type']}");
         }
     }
 
-    private function parseObject() {
+    private function parseObject(): array
+    {
         $this->expect('LBRACE');
 
         $object = [];
@@ -87,7 +92,8 @@ class Parser {
         return $object;
     }
 
-    private function parseArray() {
+    private function parseArray(): array
+    {
         $this->expect('LBRACKET');
 
         $ary = [];
@@ -106,19 +112,21 @@ class Parser {
     }
 
     // TODO: throw exception
-    private function expect(string $type) :array {
+    private function expect(string $type): array
+    {
         $token = $this->currentToken();
         $this->advance();
 
         return $token;
     }
 
-    private function advance() {
+    private function advance()
+    {
         $this->position++;
     }
 
-    private function currentToken() :array {
+    private function currentToken(): array
+    {
         return $this->tokens[$this->position] ?? ['type' => 'EOF', 'value' => null];
     }
 }
-

@@ -109,4 +109,3 @@ class LexerTest extends TestCase
         $this->assertEquals($expected, $lexer->tokens());
     }
 }
-
