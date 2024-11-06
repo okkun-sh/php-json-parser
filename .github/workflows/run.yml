@@ -36,4 +36,4 @@ jobs:
         run: vendor/bin/phpstan analyse
 
       - name: phpunit
-        run: vendor/bin/phpunit --colors=always
+        run: vendor/bin/phpunit --colors=always tests
