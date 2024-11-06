@@ -11,21 +11,18 @@ class Lexer {
     /**
      * @var int $position
      */
-    private int $position;
+    private int $position = 0;
 
     /**
      * @var array<int, array<string, string>> $tokens
      */
-    private array $tokens;
+    private array $tokens = [];
 
     /**
      * @param string $json
      */
-    public function __construct(string $json)
-    {
+    public function __construct(string $json) {
         $this->json = $json;
-        $this->position = 0;
-        $this->tokens = [];
     }
 
     /**
