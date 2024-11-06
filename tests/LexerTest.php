@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 use OkkunSh\PhpJsonParser\Lexer;
 use PHPUnit\Framework\TestCase;
 
